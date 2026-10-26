@@ -10,7 +10,7 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Phase 1: Satellite Data Pipeline (Earth Engine, Sentinel-1/2, GeoTIFF Tiling)**
 - [x] **Phase 2: Labeling System & Spatial Partitioning**
 - [x] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
-- [ ] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
+- [x] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
 - [ ] **Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)**
 - [ ] **Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine**
 - [ ] **Phase 7: Production Backend API & Secure Ingestion**
@@ -63,13 +63,13 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: F1/IoU metrics calculated on held-out spatial test set, baseline comparison table generated, GeoJSON polygon output verified against shape & CRS standards.
 
 ### Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)
-- [ ] Implement audio feature pipeline (`src/data/audio_data.py`): 5-second windowing, log-mel spectrogram extraction (128 mel bins, 16kHz).
-- [ ] Acoustic data augmentation: SpecAugment (time/frequency masking) and realistic background environmental noise mixing at variable SNR (-5 dB to 20 dB).
-- [ ] Acoustic classifier (`src/models/audio_classifier.py`): Efficient CNN classifier fine-tuned for classes: `gunshot`, `chainsaw`, `vehicle_engine`, `ambient_forest`.
-- [ ] Training script (`src/train/train_audio.py`) with per-class precision/recall, confusion matrix, and SNR degradation curves.
-- [ ] Stream/file sliding window inference engine (`src/infer/run_audio.py`) emitting structured acoustic alarm events (timestamp, sensor_id, class, confidence).
-- [ ] Edge deployment artifact: ONNX / TFLite export with benchmark inference latency.
-- [ ] **Acceptance Criteria**: Validation accuracy > 88% on acoustic events, false alarms per hour evaluated on continuous ambient noise, ONNX model generated and verified.
+- [x] Implement audio feature pipeline (`src/data/audio_data.py`): 5-second windowing, log-mel spectrogram extraction (128 mel bins, 16kHz).
+- [x] Acoustic data augmentation: SpecAugment (time/frequency masking) and realistic background environmental noise mixing at variable SNR (-5 dB to 20 dB).
+- [x] Acoustic classifier (`src/models/audio_classifier.py`): Efficient CNN classifier fine-tuned for classes: `gunshot`, `chainsaw`, `vehicle`, `ambient_forest`.
+- [x] Training script (`src/train/train_audio.py`) with per-class precision/recall, confusion matrix, and SNR degradation curves.
+- [x] Stream/file sliding window inference engine (`src/infer/run_audio.py`) emitting structured acoustic alarm events (timestamp, sensor_id, class, confidence).
+- [x] Edge deployment artifact: ONNX / TFLite export with benchmark inference latency.
+- [x] **Acceptance Criteria**: Validation accuracy > 88% on acoustic events, false alarms per hour evaluated on continuous ambient noise, ONNX model generated and verified.
 
 ### Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)
 - [ ] Dataset formatting and conversion script (`src/data/camera_data.py`) supporting standard camera-trap formats (classes: `person`, `vehicle`, `animal`, `snare_or_trap`).

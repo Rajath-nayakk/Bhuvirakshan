@@ -1,0 +1,57 @@
+{
+  "best_accuracy": 1.0,
+  "classification_report": {
+    "gunshot": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 6.0
+    },
+    "chainsaw": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 2.0
+    },
+    "vehicle": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 4.0
+    },
+    "ambient_forest": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 3.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    }
+  },
+  "snr_robustness_curve": {
+    "snr_-10_db": 0.5,
+    "snr_-5_db": 0.5,
+    "snr_0_db": 0.8333,
+    "snr_5_db": 1.0,
+    "snr_10_db": 1.0,
+    "snr_15_db": 1.0,
+    "snr_20_db": 1.0
+  },
+  "false_alarm_rate": {
+    "false_alarms_total": 0,
+    "test_duration_hours": 0.028,
+    "false_alarms_per_hour": 0.0
+  },
+  "onnx_exported": "data\\checkpoints\\audio_classifier.onnx"
+}

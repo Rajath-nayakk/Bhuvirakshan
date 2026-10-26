@@ -7,7 +7,7 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 ## Phase Status Summary
 
 - [x] **Phase 0: Project Setup & Repository Skeleton**
-- [ ] **Phase 1: Satellite Data Pipeline (Earth Engine, Sentinel-1/2, GeoTIFF Tiling)**
+- [x] **Phase 1: Satellite Data Pipeline (Earth Engine, Sentinel-1/2, GeoTIFF Tiling)**
 - [ ] **Phase 2: Labeling System & Spatial Partitioning**
 - [ ] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
 - [ ] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
@@ -32,13 +32,13 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Virtual environment active, all core imports verified without error, clean linting pass with `ruff check .`, test runner runs.
 
 ### Phase 1: Satellite Data Pipeline
-- [ ] Implement `src/data/earth_engine.py`: EE authentication, AOI loader from `configs/region.yaml`.
-- [ ] Fetch Sentinel-2 Surface Reflectance (harmonized cloud masking via SCL / QA60) and Sentinel-1 GRD (VV/VH, speckle filtered).
-- [ ] Compute monthly median composites and before/after temporal pairs across 10m spatial resolution.
-- [ ] Band stack calculation: B2 (Blue), B3 (Green), B4 (Red), B8 (NIR), B11 (SWIR1), B12 (SWIR2), NDVI, NDWI, S1 VV, S1 VH.
-- [ ] Implement GeoTIFF exporter preserving affine geotransform, CRS, and nodata masks.
-- [ ] Build offline cached sample generator in `data/samples/` for seamless demo/testing without EE credentials.
-- [ ] **Acceptance Criteria**: Unit tests verifying tile dimensions (256x256), correct CRS and transform preservation, non-empty reflectance values, and graceful fallback to offline mode when credentials are not present.
+- [x] Implement `src/data/earth_engine.py`: EE authentication, AOI loader from `configs/region.yaml`.
+- [x] Fetch Sentinel-2 Surface Reflectance (harmonized cloud masking via SCL / QA60) and Sentinel-1 GRD (VV/VH, speckle filtered).
+- [x] Compute monthly median composites and before/after temporal pairs across 10m spatial resolution.
+- [x] Band stack calculation: B2 (Blue), B3 (Green), B4 (Red), B8 (NIR), B11 (SWIR1), B12 (SWIR2), NDVI, NDWI, S1 VV, S1 VH.
+- [x] Implement GeoTIFF exporter preserving affine geotransform, CRS, and nodata masks.
+- [x] Build offline cached sample generator in `data/samples/` for seamless demo/testing without EE credentials.
+- [x] **Acceptance Criteria**: Unit tests verifying tile dimensions (256x256), correct CRS and transform preservation, non-empty reflectance values, and graceful fallback to offline mode when credentials are not present.
 
 ### Phase 2: Labeling System & Spatial Partitioning
 - [ ] Implement `src/data/labeling.py` for mask generation and label management.

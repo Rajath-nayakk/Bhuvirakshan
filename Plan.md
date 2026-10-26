@@ -11,7 +11,7 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Phase 2: Labeling System & Spatial Partitioning**
 - [x] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
 - [x] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
-- [ ] **Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)**
+- [x] **Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)**
 - [ ] **Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine**
 - [ ] **Phase 7: Production Backend API & Secure Ingestion**
 - [ ] **Phase 8: Interactive Enforcement Dashboard**
@@ -72,11 +72,11 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Validation accuracy > 88% on acoustic events, false alarms per hour evaluated on continuous ambient noise, ONNX model generated and verified.
 
 ### Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)
-- [ ] Dataset formatting and conversion script (`src/data/camera_data.py`) supporting standard camera-trap formats (classes: `person`, `vehicle`, `animal`, `snare_or_trap`).
-- [ ] Train/fine-tune YOLO model (`src/models/camera_detector.py`, `src/train/train_camera.py`) with day/night thermal simulation transforms.
-- [ ] Temporal & spatial rule engine: person or vehicle detected during curfew hours (night) or inside restricted core zones flags critical intrusion alerts.
-- [ ] Batch & stream inference pipeline (`src/infer/run_camera.py`) producing bounding-box annotated evidence frames and JSON detection records.
-- [ ] **Acceptance Criteria**: mAP50 evaluation on held-out camera trap test split, intrusion rule triggering verified, annotated evidence image output saved.
+- [x] Dataset formatting and conversion script (`src/data/camera_data.py`) supporting standard camera-trap formats (classes: `person`, `vehicle`, `animal`, `snare_or_trap`).
+- [x] Train/fine-tune YOLO model (`src/models/camera_detector.py`, `src/train/train_camera.py`) with day/night thermal simulation transforms.
+- [x] Temporal & spatial rule engine: person or vehicle detected during curfew hours (night) or inside restricted core zones flags critical intrusion alerts.
+- [x] Batch & stream inference pipeline (`src/infer/run_camera.py`) producing bounding-box annotated evidence frames and JSON detection records.
+- [x] **Acceptance Criteria**: mAP50 evaluation on held-out camera trap test split, intrusion rule triggering verified, annotated evidence image output saved.
 
 ### Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine
 - [ ] Implement `src/risk/grid.py`: Create regular 500m x 500m hexagonal or square grid cells across the study region.

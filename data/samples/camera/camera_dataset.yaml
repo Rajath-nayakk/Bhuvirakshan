@@ -1,0 +1,10 @@
+path: C:/Users/Rajath Nayak/OneDrive/Desktop/Bhuvirakshe/data/samples/camera
+train: images/train
+val: images/val
+test: images/val
+names:
+  0: person
+  1: vehicle
+  2: animal
+  3: snare_or_trap
+nc: 4

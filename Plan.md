@@ -91,18 +91,18 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Deterministic grid generation over AOI, risk score normalization [0, 1], explainability string generation for Top-N patrol recommendations.
 
 ### Phase 7: Production Backend API & Secure Ingestion
-- [ ] FastAPI application in `src/api/main.py` with SQLite relational database (`src/api/db.py`).
-- [ ] Role-Based Access Control (RBAC): JWT authentication with `admin` and `ranger` roles (`src/api/auth.py`).
-- [ ] Privacy & Safety Guard: Animal sightings and sensitive coordinates obfuscated/restricted from unauthorized endpoints.
-- [ ] Core endpoints:
+- [x] FastAPI application in `src/api/main.py` with SQLite relational database (`src/api/db.py`).
+- [x] Role-Based Access Control (RBAC): JWT authentication with `admin` and `ranger` roles (`src/api/auth.py`).
+- [x] Privacy & Safety Guard: Animal sightings and sensitive coordinates obfuscated/restricted from unauthorized endpoints.
+- [x] Core endpoints:
   - `POST /api/v1/auth/login`: Issue secure JWT tokens.
   - `GET /api/v1/alerts/top`: Retrieve daily Top-N ranked patrol cells with evidence.
   - `GET /api/v1/cells/{id}`: Detailed cell history, sensor logs, and change overlays.
   - `GET /api/v1/detections`: Filterable detections (satellite, audio, camera).
   - `POST /api/v1/events`: Ingestion endpoint for remote IoT/acoustic/camera sensors.
   - `POST /api/v1/feedback`: Ranger field patrol validation (confirmed true alert vs false alarm).
-- [ ] Comprehensive pytest test suite covering authentication, RBAC, input validation, and alert filtering.
-- [ ] **Acceptance Criteria**: OpenAPI schema generated, all test client requests passing with appropriate status codes (200, 401, 403, 422).
+- [x] Comprehensive pytest test suite covering authentication, RBAC, input validation, and alert filtering (`tests/test_api.py` 10/10 passed).
+- [x] **Acceptance Criteria**: OpenAPI schema generated, all test client requests passing with appropriate status codes (200, 401, 403, 422).
 
 ### Phase 8: Enforcement Dashboard
 - [ ] Modern, high-performance web dashboard in `frontend/` (responsive for desktop and mobile tablets).

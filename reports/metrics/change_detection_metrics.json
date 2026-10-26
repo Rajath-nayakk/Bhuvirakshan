@@ -1,0 +1,27 @@
+{
+  "model_comparison": {
+    "Deep_Siamese_UNet": {
+      "mean_iou": 0.48777854123105535,
+      "change_mean_iou": 0.33333333376977053,
+      "mean_f1": 0.493735914374281,
+      "sand_mining_iou": 5.00250124812281e-10,
+      "forest_clearing_iou": 8.090614880185585e-10,
+      "new_track_iou": 1.0
+    },
+    "Simple_NDVI_Baseline": {
+      "mean_iou": 0.7695243648352421,
+      "change_mean_iou": 0.734528295508586,
+      "mean_f1": 0.8178379257170338,
+      "sand_mining_iou": 0.20358488652575774,
+      "forest_clearing_iou": 1.0,
+      "new_track_iou": 1.0
+    }
+  },
+  "geojson_outputs": [
+    {
+      "tile_id": "tile_005",
+      "polygon_count": 0,
+      "geojson_path": "data\\processed\\change_polygons\\tile_005_detected_changes.geojson"
+    }
+  ]
+}

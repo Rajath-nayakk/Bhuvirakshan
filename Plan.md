@@ -9,7 +9,7 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Phase 0: Project Setup & Repository Skeleton**
 - [x] **Phase 1: Satellite Data Pipeline (Earth Engine, Sentinel-1/2, GeoTIFF Tiling)**
 - [x] **Phase 2: Labeling System & Spatial Partitioning**
-- [ ] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
+- [x] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
 - [ ] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
 - [ ] **Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)**
 - [ ] **Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine**
@@ -53,14 +53,14 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Tests verifying mask rasterization alignment, weak label generation logic, and non-overlapping spatial boundaries between train/val/test splits.
 
 ### Phase 3: Change-Detection Deep Learning Model
-- [ ] Implement Siamese U-Net architecture (`src/models/change_detect.py`) using `segmentation-models-pytorch` backbone with difference & concatenation feature bridges.
-- [ ] Implement Combined Dice + Focal Loss to handle severe class imbalance (small illegal clearings vs large background).
-- [ ] Coupled spatial augmentations (identical affine, flip, and rotation transforms on pre- and post-event images).
-- [ ] Time-series seasonal change suppression filter comparing current diff against historical same-season baseline to suppress false positives from natural phenology / dry-season leaf drop.
-- [ ] Training script (`src/train/train_change.py`) with MLflow experiment logging, validation IoU tracking, and checkpointing.
-- [ ] Vectorization pipeline (`src/infer/run_change.py`) converting raster prediction masks into GeoJSON polygons with area (ha) and mean confidence.
-- [ ] Quantitative baseline comparison: Deep Siamese U-Net vs standard NDVI threshold differencing.
-- [ ] **Acceptance Criteria**: F1/IoU metrics calculated on held-out spatial test set, baseline comparison table generated, GeoJSON polygon output verified against shape & CRS standards.
+- [x] Implement Siamese U-Net architecture (`src/models/change_detect.py`) using `segmentation-models-pytorch` backbone with difference & concatenation feature bridges.
+- [x] Implement Combined Dice + Focal Loss to handle severe class imbalance (small illegal clearings vs large background).
+- [x] Coupled spatial augmentations (identical affine, flip, and rotation transforms on pre- and post-event images).
+- [x] Time-series seasonal change suppression filter comparing current diff against historical same-season baseline to suppress false positives from natural phenology / dry-season leaf drop.
+- [x] Training script (`src/train/train_change.py`) with MLflow experiment logging, validation IoU tracking, and checkpointing.
+- [x] Vectorization pipeline (`src/infer/run_change.py`) converting raster prediction masks into GeoJSON polygons with area (ha) and mean confidence.
+- [x] Quantitative baseline comparison: Deep Siamese U-Net vs standard NDVI threshold differencing.
+- [x] **Acceptance Criteria**: F1/IoU metrics calculated on held-out spatial test set, baseline comparison table generated, GeoJSON polygon output verified against shape & CRS standards.
 
 ### Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)
 - [ ] Implement audio feature pipeline (`src/data/audio_data.py`): 5-second windowing, log-mel spectrogram extraction (128 mel bins, 16kHz).

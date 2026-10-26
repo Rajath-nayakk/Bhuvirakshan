@@ -12,7 +12,7 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
 - [x] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
 - [x] **Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)**
-- [ ] **Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine**
+- [x] **Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine**
 - [ ] **Phase 7: Production Backend API & Secure Ingestion**
 - [ ] **Phase 8: Interactive Enforcement Dashboard**
 - [ ] **Phase 9: Comprehensive Evaluation, Ablation Studies & Final Report**
@@ -79,16 +79,16 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: mAP50 evaluation on held-out camera trap test split, intrusion rule triggering verified, annotated evidence image output saved.
 
 ### Phase 6: Geospatial Risk Fusion & Explainable Ranking Engine
-- [ ] Implement `src/risk/grid.py`: Create regular 500m x 500m hexagonal or square grid cells across the study region.
-- [ ] Implement `src/risk/fusion.py`: Multi-source bayesian/weighted daily fusion combining:
+- [x] Implement `src/risk/grid.py`: Create regular 500m x 500m grid cells across the study region.
+- [x] Implement `src/risk/fusion.py`: Multi-source weighted daily fusion combining:
   1. Satellite change detection area (ha) and confidence.
   2. Acoustic alerts (gunshot/chainsaw count and recency).
   3. Camera trap intrusion events (humans/vehicles).
   4. Proximity penalty: distance to river channels, forest boundaries, access roads.
-  5. Historical incident density / ranger patrol track coverage.
-- [ ] Gradient-boosted ranking model support (`LightGBM` / `RandomForest`) trained on ranger feedback labels when available.
-- [ ] Implement `src/risk/ranking.py`: Rank cells daily and generate natural-language patrol rationales (e.g., "Cell #142: High Risk (0.89) - 1.4 ha riverbed extraction + 2 nighttime vehicle detections").
-- [ ] **Acceptance Criteria**: Deterministic grid generation over AOI, risk score normalization [0, 1], explainability string generation for Top-N patrol recommendations.
+  5. Historical incident density.
+- [x] Gradient-boosted ranking model support (`RandomForestClassifier`) trained on ranger feedback labels.
+- [x] Implement `src/risk/ranking.py`: Rank cells daily and generate natural-language patrol rationales (e.g., "Cell #CELL_0004: Critical Risk - 1.5 ha riverbed extraction + 2 chainsaw events").
+- [x] **Acceptance Criteria**: Deterministic grid generation over AOI, risk score normalization [0, 1], explainability string generation for Top-N patrol recommendations.
 
 ### Phase 7: Production Backend API & Secure Ingestion
 - [ ] FastAPI application in `src/api/main.py` with SQLite relational database (`src/api/db.py`).

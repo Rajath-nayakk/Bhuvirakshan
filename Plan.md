@@ -127,8 +127,8 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Complete reproducible report with real numeric metrics, confusion matrix plots, and ablation tables.
 
 ### Phase 10: Packaging, Containerization & Offline Demo Mode
-- [ ] Multi-stage `Dockerfile` and `docker-compose.yml` for zero-configuration deployment.
-- [ ] Unified pipeline runner script `scripts/run_pipeline.sh`.
-- [ ] Comprehensive `README.md` with architectural Mermaid diagrams, quickstart instructions, and API references.
-- [ ] One-command Offline Demo Mode running entirely on verified sample data without requiring cloud credentials.
-- [ ] **Acceptance Criteria**: Container builds successfully, `scripts/run_pipeline.sh` executes clean demonstration, end-to-end demo launches dashboard seamlessly.
+- [x] Multi-stage `Dockerfile` and `docker-compose.yml` for zero-configuration deployment.
+- [x] Unified pipeline runner script `scripts/run_pipeline.sh`.
+- [x] Comprehensive `README.md` with architectural Mermaid diagrams, quickstart instructions, and API references.
+- [x] One-command Offline Demo Mode running entirely on verified sample data without requiring cloud credentials.
+- [x] **Acceptance Criteria**: Container builds successfully, `scripts/run_pipeline.sh` executes clean demonstration, end-to-end demo launches dashboard seamlessly.

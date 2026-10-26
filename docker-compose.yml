@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  guardian-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forest_river_guardian
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///data/guardian.db
+      - JWT_SECRET_KEY=forest-and-river-guardian-secure-production-jwt-key-32b
+      - ACCESS_TOKEN_EXPIRE_MINUTES=1440
+      - INITIAL_ADMIN_EMAIL=admin@guardian.internal
+      - INITIAL_ADMIN_PASSWORD=ForestGuardianAdmin2026!
+      - INITIAL_RANGER_EMAIL=ranger@guardian.internal
+      - INITIAL_RANGER_PASSWORD=RangerPatrol2026!
+    volumes:
+      - guardian_data:/app/data
+      - guardian_reports:/app/reports
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  guardian_data:
+  guardian_reports:

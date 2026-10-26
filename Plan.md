@@ -116,14 +116,15 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Smooth rendering of GeoJSON grid, functional before/after image comparison, feedback button updates DB status dynamically, JWT session management (`tests/test_dashboard.py` passed).
 
 ### Phase 9: Evaluation, Ablation Studies & Final Report
-- [ ] Execute full end-to-end pipeline on held-out test region and timeline.
-- [ ] Generate comprehensive evaluation artifacts in `reports/`:
+- [x] Execute full end-to-end pipeline on held-out test region and timeline.
+- [x] Generate comprehensive evaluation artifacts in `reports/`:
   - Per-model classification & detection metrics.
   - Siamese U-Net vs NDVI baseline comparison table.
   - Audio model noise-robustness curves across varying SNR.
-  - Ablation study: Optical-only vs Optical + Sentinel-1 Radar vs Seasonal Filtering.
-- [ ] Author `reports/final_report.md` detailing methodology, empirical results, ethical safeguards, and deployment guidelines.
-- [ ] **Acceptance Criteria**: Complete reproducible report with real numeric metrics, confusion matrix plots, and ablation tables.
+  - Ablation study: Optical-only vs Optical + Sentinel-1 Radar vs Seasonal Filtering (`reports/metrics/ablation_study.json`).
+- [x] Author `reports/final_report.md` detailing methodology, empirical results, ethical safeguards, and deployment guidelines.
+- [x] Created exploratory and results notebooks (`notebooks/01_explore_data.ipynb`, `notebooks/02_results.ipynb`).
+- [x] **Acceptance Criteria**: Complete reproducible report with real numeric metrics, confusion matrix plots, and ablation tables.
 
 ### Phase 10: Packaging, Containerization & Offline Demo Mode
 - [ ] Multi-stage `Dockerfile` and `docker-compose.yml` for zero-configuration deployment.

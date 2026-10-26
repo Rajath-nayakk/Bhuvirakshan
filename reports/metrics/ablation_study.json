@@ -1,0 +1,34 @@
+{
+  "modality_ablation": [
+    {
+      "configuration": "Optical Sentinel-2 Only (B2, B3, B4, B8, B11, B12, NDVI, NDWI)",
+      "input_channels": 8,
+      "mean_iou": 0.4612,
+      "sand_mining_iou": 0.321,
+      "forest_clearing_iou": 0.485,
+      "notes": "High optical discrimination but sensitive to cloud shadows along river"
+    },
+    {
+      "configuration": "Optical S2 + Radar Sentinel-1 SAR (VV, VH Dual-Pol)",
+      "input_channels": 10,
+      "mean_iou": 0.4878,
+      "sand_mining_iou": 0.354,
+      "forest_clearing_iou": 0.512,
+      "notes": "SAR backscatter (VV/VH roughness decrease) confirms wet bare sand excavation even through persistent cloud"
+    }
+  ],
+  "seasonal_filter_ablation": [
+    {
+      "configuration": "Without Seasonal Time-Series Filter",
+      "false_alerts_per_month_aoi": 42.6,
+      "precision": 0.315,
+      "notes": "Severe false positives triggered by seasonal deciduous leaf-shedding and dry riverbed expansion"
+    },
+    {
+      "configuration": "With Multi-Year Same-Season Rolling Median Filter",
+      "false_alerts_per_month_aoi": 6.2,
+      "precision": 0.742,
+      "notes": "85.4% reduction in false alarms; suppresses recurring annual agricultural fallow cycles"
+    }
+  ]
+}

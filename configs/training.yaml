@@ -1,0 +1,73 @@
+# Training Configurations: Forest & River Guardian
+
+change_detection:
+  model:
+    architecture: "SiameseUNet"
+    encoder_name: "resnet34"
+    encoder_weights: "imagenet"
+    in_channels: 10  # B2, B3, B4, B8, B11, B12, NDVI, NDWI, S1_VV, S1_VH
+    num_classes: 4   # 0: bg, 1: sand_mining, 2: forest_clearing, 3: new_track
+    feature_fusion: "diff_and_cat"  # Options: 'diff', 'concat', 'diff_and_cat'
+  
+  training:
+    batch_size: 8
+    num_epochs: 25
+    learning_rate: 0.0003
+    weight_decay: 0.0001
+    optimizer: "AdamW"
+    scheduler: "CosineAnnealingLR"
+    loss:
+      focal_weight: 0.5
+      dice_weight: 0.5
+      gamma: 2.0
+    random_seed: 42
+    early_stopping_patience: 6
+    tile_size: 256
+    resolution_m: 10.0
+    seasonal_suppression_threshold: 0.15
+
+audio_classifier:
+  model:
+    architecture: "efficientnet_b0"
+    num_classes: 4   # gunshot, chainsaw, vehicle, ambient_forest
+    pretrained: true
+    dropout: 0.3
+  
+  features:
+    sample_rate: 16000
+    clip_duration_sec: 5.0
+    n_fft: 1024
+    hop_length: 512
+    n_mels: 128
+    f_min: 50
+    f_max: 8000
+  
+  training:
+    batch_size: 16
+    num_epochs: 20
+    learning_rate: 0.0005
+    weight_decay: 0.0001
+    snr_db_range: [-5, 20]
+    spec_augment:
+      time_mask_max: 20
+      freq_mask_max: 16
+    random_seed: 42
+
+camera_detector:
+  model:
+    type: "yolov8n"
+    img_size: 640
+    confidence_threshold: 0.40
+    iou_threshold: 0.45
+    classes:
+      0: "person"
+      1: "vehicle"
+      2: "animal"
+      3: "snare_or_trap"
+  
+  training:
+    epochs: 30
+    batch_size: 16
+    learning_rate: 0.01
+    mosaic: 1.0
+    night_simulation_prob: 0.4

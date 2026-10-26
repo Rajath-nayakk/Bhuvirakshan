@@ -1,0 +1,42 @@
+# Risk Fusion & Priority Ranking Configuration: Forest & River Guardian
+
+fusion:
+  algorithm: "transparent_weighted"  # options: "transparent_weighted", "gradient_boosted"
+  
+  # Component weights (sum normalized to 1.0)
+  weights:
+    satellite_change_area: 0.30
+    satellite_confidence: 0.10
+    acoustic_gunshot_events: 0.20
+    acoustic_chainsaw_events: 0.15
+    camera_intrusion_events: 0.15
+    track_detection: 0.05
+    proximity_penalty: 0.05
+  
+  # Proximity buffer sensitivities (meters)
+  proximity:
+    river_critical_buffer_m: 300
+    road_critical_buffer_m: 500
+    core_zone_boundary_m: 1000
+    weight_river_proximity: 0.4
+    weight_road_proximity: 0.3
+    weight_boundary_proximity: 0.3
+    
+  # Temporal decay factors (per day)
+  temporal_decay:
+    acoustic_half_life_days: 2.0
+    camera_half_life_days: 2.0
+    satellite_half_life_days: 14.0
+
+ranking:
+  daily_top_n: 10
+  risk_threshold_high: 0.70
+  risk_threshold_medium: 0.40
+  min_alert_confidence: 0.35
+  
+  # Thresholds for generating natural language explanations
+  explanation_rules:
+    large_clearing_ha: 0.5
+    gunshot_critical_count: 1
+    chainsaw_critical_count: 2
+    night_intrusion_flag: true

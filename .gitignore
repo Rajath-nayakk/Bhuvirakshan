@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Environment and Secrets
+.env
+*.pem
+*.key
+credentials.json
+service_account.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data directories (keep samples tracked)
+data/raw/
+data/processed/
+data/labels/
+data/mlruns/
+data/*.db
+data/*.sqlite
+!data/samples/
+!data/samples/**
+
+# Model weights & large artifacts
+*.pt
+*.pth
+*.onnx
+runs/
+wandb/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/

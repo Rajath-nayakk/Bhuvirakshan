@@ -1,0 +1,38 @@
+# Study Region Configuration: Forest & River Guardian
+# Default: Cauvery River corridor & adjoining Wildlife Sanctuary / Reserve Forest (~25 km stretch)
+region:
+  name: "Cauvery River & Malai Mahadeshwara Forest Corridor"
+  country: "India"
+  state: "Karnataka"
+  
+  # Bounding Box: [min_lon, min_lat, max_lon, max_lat] in EPSG:4326 (WGS84)
+  # Span: ~25 km East-West by ~25 km North-South
+  bbox: [77.1500, 11.9500, 77.3800, 12.1800]
+  
+  # Coordinate Reference System for local analysis (UTM Zone 43N for Southern India)
+  utm_epsg: 32643
+  
+  # River network & protected forest boundaries
+  river:
+    name: "Cauvery"
+    buffer_meters: 250  # Riverbed sand extraction active monitoring buffer
+    stretch_length_km: 25.5
+    
+  forest_block:
+    name: "Cauvery Wildlife Sanctuary Buffer"
+    protection_status: "Category IV Protected Area"
+    core_zone_buffer_meters: 1000
+    curfew_hours:
+      start: "18:00"
+      end: "06:00"
+
+# Spatial sampling grid configuration
+grid:
+  cell_size_meters: 500
+  grid_type: "square"  # options: "square", "hexagonal"
+
+# Temporal monitoring windows
+temporal:
+  default_baseline_year: 2023
+  default_target_year: 2024
+  cloud_cover_max_percent: 20

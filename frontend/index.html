@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forest & River Guardian - Enforcement & Risk Hotspot Dashboard</title>
+  <meta name="description" content="AI-powered patrol inspection and risk hotspot monitoring system detecting illegal sand mining, tree felling, and poaching.">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Header Navigation -->
+  <header class="navbar" id="mainNavbar">
+    <div class="nav-brand">
+      <div class="brand-logo">
+        <i data-lucide="shield-alert" class="brand-icon"></i>
+      </div>
+      <div>
+        <h1 class="brand-title">Forest & River Guardian</h1>
+        <p class="brand-subtitle">Cauvery Wildlife Sanctuary & River Basin Multi-Sensor Enforcement</p>
+      </div>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="quick-stats" id="quickStatsBar">
+      <div class="stat-pill">
+        <span class="stat-label">Active Alerts</span>
+        <span class="stat-value critical" id="statAlertsCount">--</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-label">Acoustic Events</span>
+        <span class="stat-value warning" id="statAcousticCount">--</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-label">Camera Threats</span>
+        <span class="stat-value" id="statCameraCount">--</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-label">Satellite Changes</span>
+        <span class="stat-value" id="statChangesCount">--</span>
+      </div>
+    </div>
+
+    <!-- User Profile & Controls -->
+    <div class="nav-controls">
+      <div class="user-badge" id="userBadge">
+        <i data-lucide="user-check" class="user-icon"></i>
+        <div class="user-info">
+          <span class="user-name" id="userNameLabel">Ranger Patrol</span>
+          <span class="user-role" id="userRoleLabel">Field Ranger</span>
+        </div>
+      </div>
+      <button class="btn btn-outline" id="btnLogoutBtn" title="Logout">
+        <i data-lucide="log-out"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="dashboard-layout">
+    
+    <!-- Left Sidebar: Priority Alerts & Inspections -->
+    <aside class="sidebar" id="sidebarPanel">
+      <div class="sidebar-header">
+        <div class="sidebar-title-row">
+          <h2 class="sidebar-title">Daily Patrol Priority</h2>
+          <span class="badge badge-pulse" id="alertLiveBadge">LIVE AOI</span>
+        </div>
+        <p class="sidebar-desc">Ranked 500m cells prioritized by multi-sensor change detection & AI acoustics.</p>
+        
+        <!-- Filter Controls -->
+        <div class="filter-bar">
+          <div class="select-wrapper">
+            <select id="threatFilterSelect" class="input-select">
+              <option value="ALL">All Threat Levels</option>
+              <option value="CRITICAL">Critical Only</option>
+              <option value="HIGH">High & Critical</option>
+            </select>
+          </div>
+          <button class="btn btn-sm btn-secondary" id="btnRefreshAlerts" title="Refresh List">
+            <i data-lucide="rotate-cw"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Priority Alerts List Container -->
+      <div class="alerts-list" id="alertsListContainer">
+        <!-- Rendered dynamically by app.js -->
+        <div class="skeleton-loader">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center: Interactive Map Container -->
+    <section class="map-viewport">
+      <div id="mapContainer" class="map-container"></div>
+
+      <!-- Map Layer Toggles Floating Card -->
+      <div class="map-layer-panel glassmorphism" id="mapLayerPanel">
+        <h3 class="layer-panel-title">
+          <i data-lucide="layers" class="panel-icon"></i> Layers & Feeds
+        </h3>
+        <label class="toggle-control">
+          <input type="checkbox" id="toggleRiskGrid" checked>
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">500m Risk Grid</span>
+        </label>
+        <label class="toggle-control">
+          <input type="checkbox" id="toggleChangePolygons" checked>
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">Satellite Changes</span>
+        </label>
+        <label class="toggle-control">
+          <input type="checkbox" id="toggleAcousticSensors" checked>
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">Acoustic Nodes</span>
+        </label>
+        <label class="toggle-control">
+          <input type="checkbox" id="toggleCameraTraps" checked>
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">Camera Trap Traps</span>
+        </label>
+        <label class="toggle-control">
+          <input type="checkbox" id="toggleBaseLayer" checked>
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">Satellite Basemap</span>
+        </label>
+      </div>
+
+      <!-- Map Legend -->
+      <div class="map-legend glassmorphism" id="mapLegend">
+        <h4 class="legend-title">Risk Threat Index</h4>
+        <div class="legend-scale">
+          <div class="legend-item"><span class="legend-color cr-critical"></span> Critical (&gt;0.75)</div>
+          <div class="legend-item"><span class="legend-color cr-high"></span> High (0.50-0.75)</div>
+          <div class="legend-item"><span class="legend-color cr-medium"></span> Medium (0.25-0.50)</div>
+          <div class="legend-item"><span class="legend-color cr-low"></span> Low (&lt;0.25)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Drawer: Cell Details & Forensic Evidence Panel -->
+    <aside class="detail-drawer" id="detailDrawer">
+      <div class="drawer-header">
+        <div class="drawer-header-left">
+          <span class="badge" id="drawerThreatBadge">CRITICAL</span>
+          <h2 class="drawer-title" id="drawerCellId">CELL_0012</h2>
+        </div>
+        <button class="btn-icon" id="btnCloseDrawer" title="Close Panel">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="drawer-body" id="drawerBody">
+        <!-- Risk Gauge & Explanation -->
+        <div class="risk-overview-card glassmorphism">
+          <div class="score-dial">
+            <span class="score-number" id="drawerRiskScore">0.89</span>
+            <span class="score-subtext">Composite Score</span>
+          </div>
+          <div class="explanation-box">
+            <h4 class="box-heading">Patrol Rationale</h4>
+            <p class="explanation-text" id="drawerExplanation">Evaluating multi-sensor evidence...</p>
+          </div>
+        </div>
+
+        <!-- Evidence Tabs -->
+        <div class="evidence-tabs">
+          <button class="tab-btn active" id="tabBtnSatellite" data-tab="tabSatellite">
+            <i data-lucide="satellite"></i> Satellite
+          </button>
+          <button class="tab-btn" id="tabBtnAcoustic" data-tab="tabAcoustic">
+            <i data-lucide="volume-2"></i> Audio
+          </button>
+          <button class="tab-btn" id="tabBtnCamera" data-tab="tabCamera">
+            <i data-lucide="camera"></i> Camera
+          </button>
+        </div>
+
+        <!-- Tab 1: Satellite Change Detection Evidence -->
+        <div class="tab-content active" id="tabSatellite">
+          <div class="evidence-section">
+            <h4 class="section-title">Optical & Radar Multi-Temporal Differencing</h4>
+            <div class="satellite-preview-container">
+              <img id="satelliteComparisonImg" src="/figures/satellite_before_after.png" alt="Satellite Before After Comparison" class="evidence-img">
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <span class="metric-label">Extraction Area</span>
+                <span class="metric-val" id="drawerAreaHa">1.44 ha</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Detection Confidence</span>
+                <span class="metric-val" id="drawerConfidence">88%</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Seasonal Filter</span>
+                <span class="metric-val success">Passed (No Anomaly)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Acoustic Threat Evidence -->
+        <div class="tab-content" id="tabAcoustic">
+          <div class="evidence-section">
+            <h4 class="section-title">Log-Mel Spectrogram & Classifier Output</h4>
+            <div class="audio-evidence-card">
+              <img src="/figures/audio_spectrogram_sample.png" alt="Acoustic Log Mel Spectrogram" class="evidence-img">
+              <div class="audio-player-sim">
+                <button class="btn btn-sm btn-primary" id="btnPlayAudioSim">
+                  <i data-lucide="play"></i> Listen 5.0s Intercept
+                </button>
+                <span class="audio-sim-label">Gunshot Pulse (SNR: +12dB)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Camera Trap Evidence -->
+        <div class="tab-content" id="tabCamera">
+          <div class="evidence-section">
+            <h4 class="section-title">Night IR & Curfew Intrusion Frame</h4>
+            <div class="camera-evidence-card">
+              <img id="cameraEvidenceImg" src="/figures/audio_snr_robustness.png" alt="Camera Trap Frame" class="evidence-img">
+              <p class="caption-text" id="cameraFrameCaption">Annotated infrared frame with bounding box detection.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ranger Verification & Field Feedback Section -->
+        <div class="feedback-action-box glassmorphism">
+          <h4 class="box-heading">Ranger Field Inspection Action</h4>
+          <p class="subtext">Submit ground-truthed feedback to update enforcement status and retrain model weights.</p>
+          
+          <div class="feedback-notes-wrapper">
+            <textarea id="feedbackNotesInput" class="feedback-textarea" placeholder="Enter patrol inspection observations (e.g. Verified unauthorized sand dredging machinery)..."></textarea>
+          </div>
+
+          <div class="action-buttons-row">
+            <button class="btn btn-success" id="btnConfirmAlert">
+              <i data-lucide="check-circle-2"></i> Confirm True Alert
+            </button>
+            <button class="btn btn-danger" id="btnFalseAlarm">
+              <i data-lucide="x-circle"></i> Flag False Alarm
+            </button>
+          </div>
+          <div id="feedbackStatusMsg" class="status-msg"></div>
+        </div>
+
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Login Modal Overlay -->
+  <div class="modal-overlay hidden" id="loginModal">
+    <div class="login-card glassmorphism">
+      <div class="login-header">
+        <div class="login-logo">
+          <i data-lucide="shield-alert" class="brand-icon"></i>
+        </div>
+        <h2 class="login-title">Forest & River Guardian</h2>
+        <p class="login-desc">Authorized Enforcement & Ranger Access Portal</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="loginEmailInput" class="form-label">Authorized Officer Email</label>
+          <input type="email" id="loginEmailInput" class="form-input" value="ranger@guardian.internal" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPasswordInput" class="form-label">Security Credential / Passkey</label>
+          <input type="password" id="loginPasswordInput" class="form-input" value="RangerPatrol2026!" required>
+        </div>
+
+        <div class="role-hint-card">
+          <p><strong>Demo Roles:</strong></p>
+          <p>• Field Ranger: <code>ranger@guardian.internal</code> (Masked coordinates for wildlife)</p>
+          <p>• HQ Admin: <code>admin@guardian.internal</code> (Full access to all coordinates)</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="btnSubmitLogin">
+          <i data-lucide="lock"></i> Authenticate & Enter Dashboard
+        </button>
+        <div id="loginErrorMsg" class="error-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

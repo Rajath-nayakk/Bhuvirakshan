@@ -105,15 +105,15 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: OpenAPI schema generated, all test client requests passing with appropriate status codes (200, 401, 403, 422).
 
 ### Phase 8: Enforcement Dashboard
-- [ ] Modern, high-performance web dashboard in `frontend/` (responsive for desktop and mobile tablets).
-- [ ] Interactive map (Leaflet / MapLibre) with satellite imagery, 500m risk grid choropleth, detected change polygons, sensor markers.
-- [ ] Daily Top-N patrol inspection panel with evidence cards:
+- [x] Modern, high-performance web dashboard in `frontend/` (responsive for desktop and mobile tablets).
+- [x] Interactive map (Leaflet / MapLibre) with satellite imagery, 500m risk grid choropleth, detected change polygons, sensor markers.
+- [x] Daily Top-N patrol inspection panel with evidence cards:
   - Optical & Radar before/after comparison slider.
   - Acoustic spectrogram player & detection waveform.
   - Camera-trap evidence frame with bounding boxes.
-- [ ] One-click Ranger Feedback workflow (Confirm Alert / False Positive) sending real-time updates to backend.
-- [ ] Layer control toggles (Satellite Changes, Sensor Locations, Riverbed Buffers, Curfew Zones).
-- [ ] **Acceptance Criteria**: Smooth rendering of GeoJSON grid, functional before/after image comparison, feedback button updates DB status dynamically, JWT session management.
+- [x] One-click Ranger Feedback workflow (Confirm Alert / False Positive) sending real-time updates to backend.
+- [x] Layer control toggles (Satellite Changes, Sensor Locations, Riverbed Buffers, Curfew Zones).
+- [x] **Acceptance Criteria**: Smooth rendering of GeoJSON grid, functional before/after image comparison, feedback button updates DB status dynamically, JWT session management (`tests/test_dashboard.py` passed).
 
 ### Phase 9: Evaluation, Ablation Studies & Final Report
 - [ ] Execute full end-to-end pipeline on held-out test region and timeline.

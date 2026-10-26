@@ -8,7 +8,7 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 
 - [x] **Phase 0: Project Setup & Repository Skeleton**
 - [x] **Phase 1: Satellite Data Pipeline (Earth Engine, Sentinel-1/2, GeoTIFF Tiling)**
-- [ ] **Phase 2: Labeling System & Spatial Partitioning**
+- [x] **Phase 2: Labeling System & Spatial Partitioning**
 - [ ] **Phase 3: Change-Detection Deep Learning Model (Siamese U-Net)**
 - [ ] **Phase 4: Acoustic Event Detection (Gunshots, Chainsaws, Engines)**
 - [ ] **Phase 5: Camera-Trap Vision Detector (YOLO Intrusion Engine)**
@@ -41,16 +41,16 @@ An AI system detecting illegal sand mining, illegal tree felling, and poaching a
 - [x] **Acceptance Criteria**: Unit tests verifying tile dimensions (256x256), correct CRS and transform preservation, non-empty reflectance values, and graceful fallback to offline mode when credentials are not present.
 
 ### Phase 2: Labeling System & Spatial Partitioning
-- [ ] Implement `src/data/labeling.py` for mask generation and label management.
-- [ ] Define standardized class hierarchy:
+- [x] Implement `src/data/labeling.py` for mask generation and label management.
+- [x] Define standardized class hierarchy:
   - 0: Background (Stable forest, water, established settlements)
   - 1: Sand Mining / Riverbed Extraction
   - 2: Forest Clearing / Illegal Logging
   - 3: New Track / Access Road
-- [ ] GeoJSON/Shapefile importer to rasterize ground truth or reported GPS incident points into raster masks.
-- [ ] Rule-based weak supervision generator (NDVI loss drop $>0.25$, MNDWI / Bare Soil index shifts inside riverbed buffer) marked with `weak_label=True`.
-- [ ] Spatial cross-validation / train-val-test partitioning ensuring strict non-overlapping geographical blocks to prevent spatial autocorrelation leakage.
-- [ ] **Acceptance Criteria**: Tests verifying mask rasterization alignment, weak label generation logic, and non-overlapping spatial boundaries between train/val/test splits.
+- [x] GeoJSON/Shapefile importer to rasterize ground truth or reported GPS incident points into raster masks.
+- [x] Rule-based weak supervision generator (NDVI loss drop $>0.25$, MNDWI / Bare Soil index shifts inside riverbed buffer) marked with `weak_label=True`.
+- [x] Spatial cross-validation / train-val-test partitioning ensuring strict non-overlapping geographical blocks to prevent spatial autocorrelation leakage.
+- [x] **Acceptance Criteria**: Tests verifying mask rasterization alignment, weak label generation logic, and non-overlapping spatial boundaries between train/val/test splits.
 
 ### Phase 3: Change-Detection Deep Learning Model
 - [ ] Implement Siamese U-Net architecture (`src/models/change_detect.py`) using `segmentation-models-pytorch` backbone with difference & concatenation feature bridges.
